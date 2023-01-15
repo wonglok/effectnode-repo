@@ -1,11 +1,11 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// })
 
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-})
+// const withPWA = require('next-pwa')({
+//   dest: 'public',
+//   disable: process.env.NODE_ENV === 'development',
+// })
 
 const nextConfig = {
   // uncomment the following snippet if using styled components
@@ -46,30 +46,32 @@ const nextConfig = {
   },
 }
 
-// manage i18n
-if (process.env.EXPORT !== 'true') {
-  nextConfig.i18n = {
-    locales: ['en', 'jp'],
-    defaultLocale: 'en',
-  }
-}
+module.exports = nextConfig
 
-const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
+// // manage i18n
+// if (process.env.EXPORT !== 'true') {
+//   nextConfig.i18n = {
+//     locales: ['en', 'jp'],
+//     defaultLocale: 'en',
+//   }
+// }
 
-module.exports = (_phase, { defaultConfig }) => {
-  const plugins = [[withPWA], [withBundleAnalyzer, {}]]
+// const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
 
-  const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
-    ...defaultConfig,
-    ...nextConfig,
-  })
+// module.exports = (_phase, { defaultConfig }) => {
+//   const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
-  const finalConfig = {}
-  Object.keys(wConfig).forEach((key) => {
-    if (!KEYS_TO_OMIT.includes(key)) {
-      finalConfig[key] = wConfig[key]
-    }
-  })
+//   const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
+//     ...defaultConfig,
+//     ...nextConfig,
+//   })
 
-  return finalConfig
-}
+//   const finalConfig = {}
+//   Object.keys(wConfig).forEach((key) => {
+//     if (!KEYS_TO_OMIT.includes(key)) {
+//       finalConfig[key] = wConfig[key]
+//     }
+//   })
+
+//   return finalConfig
+// }
